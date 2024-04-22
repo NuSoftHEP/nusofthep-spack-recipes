@@ -3,10 +3,9 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-import os
-
 from spack import *
-from spack.pkg.fnal_art.utilities import *
+from spack.pkg.fnal_art.fnal_github_package import *
+from spack.util.prefix import Prefix
 
 
 def sanitize_environments(*args):
@@ -25,23 +24,16 @@ def sanitize_environments(*args):
             env.deprioritize_system_paths(var)
 
 
-class Nug4(CMakePackage):
-    """Generator interfaces to art for GENIE and GiBUU."""
+class Nug4(CMakePackage, FnalGithubPackage):
+    """Geant4 interface from NuTools"""
 
-    git = "https://github.com/NuSoftHEP/nug4.git"
-    homepage = git
-    url = "https://github.com/NuSoftHEP/nug4/archive/refs/tags/1.16.05.tar.gz"
-    list_url = "https://github.com/NuSoftHEP/nug4/tags"
+    repo = "NuSoftHEP/nug4"
+    license("Apache-2.0")
+    version_patterns = ["v1_15_02", "1.16.03"]
 
     version("1.16.05", sha256="91d5cf3bfed7206e92193582b4dca48e9089042b959c088666c5c83cedbf0e56")
     version("1.15.02", sha256="53dcc4998a9e4841739cfbc7ee2e5cb312321cb1be2591af891f39ff7d306ed7")
     version("develop", branch="develop", get_full_repo=True)
-
-    def url_for_version(self, version):
-        if version < Version("1.16.03"):
-            return github_version_url("NuSoftHEP", "nug4", f"v{version.underscored}")
-        else:
-            return super().url_for_version(version)
 
     variant(
         "cxxstd",
@@ -56,14 +48,20 @@ class Nug4(CMakePackage):
 
     depends_on("art")
     depends_on("boost")
-    depends_on("nusimdata")
     depends_on("cetlib")
     depends_on("cetlib-except")
-    depends_on("geant4 cxxstd=20", when="cxxstd=20")
+    depends_on("clhep")
     depends_on("geant4 cxxstd=17", when="cxxstd=17")
+    depends_on("geant4 cxxstd=20", when="cxxstd=20")
     depends_on("messagefacility")
+    depends_on("nusimdata")
     depends_on("pythia8")
     depends_on("root")
+
+    with when("@:1.16.05"):
+        # Remove from @develop
+        depends_on("art-root-io")
+        depends_on("canvas-root-io")
 
     def cmake_args(self):
         return [
@@ -71,11 +69,11 @@ class Nug4(CMakePackage):
             self.define("IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES", True),
         ]
 
-    def setup_build_environment(self, spack_env):
-        spack_env.prepend_path("CET_PLUGIN_PATH", os.path.join(self.build_directory, "lib"))
-        spack_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
+    def setup_build_environment(self, build_env):
+        build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
+        build_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         # Cleanup.
-        sanitize_environments(spack_env)
+        sanitize_environments(build_env)
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)

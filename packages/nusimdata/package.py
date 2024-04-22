@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.fnal_art.utilities import *
+from spack.pkg.fnal_art.fnal_github_package import *
 
 
 def sanitize_environments(*args):
@@ -23,22 +23,15 @@ def sanitize_environments(*args):
             env.deprioritize_system_paths(var)
 
 
-class Nusimdata(CMakePackage):
+class Nusimdata(CMakePackage, FnalGithubPackage):
     """Nusimdata"""
 
-    git = "https://github.com/NuSoftHEP/nusimdata.git"
-    homepage = git
-    url = "https://github.com/NuSoftHEP/nusimdata/archive/refs/tags/v1_24_05.tar.gz"
-    list_url = "https://api.github.com/repos/NuSoftHEP/nusimdata/tags"
+    repo = "NuSoftHEP/nusimdata"
+    license("Apache-2.0")
+    version_patterns = ["v1_24_05", "1.27.02"]
 
-    version("1.27.02", sha256="ed61e94ef931ed6383299db281c54df82136dfe5331492072ac1a3f08770b6a8")
     version("develop", branch="develop", get_full_repo=True)
-
-    def url_for_version(self, version):
-        return github_version_url("NuSoftHEP", "nusimdata", f"v{version.underscored}")
-
-    def fetch_remote_versions(self, concurrency=None):
-        return fetch_remote_tags("NuSoftHEP", "nusimdata", self.list_url)
+    version("1.27.02", sha256="ed61e94ef931ed6383299db281c54df82136dfe5331492072ac1a3f08770b6a8")
 
     variant(
         "cxxstd",
@@ -55,16 +48,17 @@ class Nusimdata(CMakePackage):
     depends_on("canvas-root-io")
     depends_on("cetlib-except")
     depends_on("dk2nudata")
+    depends_on("nufinder", when="@1.27.02:")
     depends_on("root")
 
     def cmake_args(self):
         return [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
 
-    def setup_build_environment(self, spack_env):
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
-        spack_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
+    def setup_build_environment(self, build_env):
+        build_env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
+        build_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         # Cleanup.
-        sanitize_environments(spack_env)
+        sanitize_environments(build_env)
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)

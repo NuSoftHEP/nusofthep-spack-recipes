@@ -3,10 +3,9 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-import os
-
 from spack import *
-from spack.pkg.fnal_art.utilities import *
+from spack.pkg.fnal_art.fnal_github_package import *
+from spack.util.prefix import Prefix
 
 
 def sanitize_environments(*args):
@@ -25,23 +24,16 @@ def sanitize_environments(*args):
             env.deprioritize_system_paths(var)
 
 
-class Nurandom(CMakePackage):
+class Nurandom(CMakePackage, FnalGithubPackage):
     """Random number generator interfaces to art."""
 
-    git = "https://github.com/NuSoftHEP/nurandom.git"
-    homepage = git
-    url = "https://github.com/NuSoftHEP/nurandom/archive/refs/tags/1.11.04.tar.gz"
-    list_url = "https://github.com/NuSoftHEP/nurandom/tags"
+    repo = "NuSoftHEP/nurandom"
+    license("Apache-2.0")
+    version_patterns = ["v1_10_02", "1.11.03"]
 
     version("1.11.04", sha256="bbd9b5b8773e640d84ce7e92b40812221f6419a0a5eead9da1d93eebbe54d6b4")
     version("1.10.02", sha256="9010dc663d08ee3c7451a7c423f2350a77fe98f3de8bfd4cbd9a5bdcb67c6114")
     version("develop", branch="develop", get_full_repo=True)
-
-    def url_for_version(self, version):
-        if version < Version("1.11.03"):
-            return github_version_url("NuSoftHEP", "nurandom", f"v{version.underscored}")
-        else:
-            return super().url_for_version(version)
 
     variant(
         "cxxstd",
@@ -60,16 +52,21 @@ class Nurandom(CMakePackage):
     depends_on("cetlib-except")
     depends_on("clhep")
     depends_on("fhicl-cpp")
+    depends_on("messagefacility")
     depends_on("root")
+
+    with when("@:1.11.04"):
+        # Removed from @develop
+        depends_on("boost +filesystem")
 
     def cmake_args(self):
         return [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
 
-    def setup_build_environment(self, spack_env):
-        spack_env.prepend_path("CET_PLUGIN_PATH", os.path.join(self.build_directory, "lib"))
-        spack_env.prepend_path("ROOT_INCLUDE_PATH", str(self.prefix.include))
+    def setup_build_environment(self, build_env):
+        build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
+        build_env.prepend_path("ROOT_INCLUDE_PATH", str(self.prefix.include))
         # Cleanup.
-        sanitize_environments(spack_env)
+        sanitize_environments(build_env)
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)

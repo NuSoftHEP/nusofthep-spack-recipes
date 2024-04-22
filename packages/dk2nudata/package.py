@@ -6,21 +6,16 @@
 import os
 
 from spack import *
-from spack.pkg.fnal_art.utilities import *
+from spack.pkg.fnal_art.fnal_github_package import *
 
 
-class Dk2nudata(CMakePackage):
+class Dk2nudata(CMakePackage, FnalGithubPackage):
     """This package consolidates the disparate formats of neutrino beam simulation "flux" files."""
 
-    homepage = "https://github.com/NuSoftHEP/dk2nu.git"
-    git = homepage
-    url = "https://github.com/NuSoftHEP/dk2nu/archive/refs/tags/v01_10_01.tar.gz"
-    list_url = "https://github.com/NuSoftHEP/dk2nu/tags"
+    repo = "NuSoftHEP/dk2nu"
+    version_patterns = ["v0_10_01"]
 
     version("01.10.01", sha256="8680ffae5182dc1c0a04a3410cf687c4b7c0d9420e2aabc5c3c4bb42c69c3dd0")
-
-    def url_for_version(self, version):
-        return github_version_url("NuSoftHEP", "dk2nu", f"v{version.underscored}")
 
     variant(
         "cxxstd",

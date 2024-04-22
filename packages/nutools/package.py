@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.fnal_art.utilities import *
+from spack.pkg.fnal_art.fnal_github_package import *
 
 
 def sanitize_environments(*args):
@@ -23,23 +23,16 @@ def sanitize_environments(*args):
             env.deprioritize_system_paths(var)
 
 
-class Nutools(CMakePackage):
+class Nutools(CMakePackage, FnalGithubPackage):
     """Nutools"""
 
-    git = "https://github.com/NuSoftHEP/nutools.git"
-    homepage = git
-    url = "https://github.com/NuSoftHEP/nutools/archive/refs/tags/3.15.04.tar.gz"
-    list_url = "https://github.com/NuSoftHEP/nutools/tags"
+    repo = "NuSoftHEP/nutools"
+    license("Apache-2.0")
+    version_patterns = ["v3_15_04", "3.16.03"]
 
     version("3.16.05", sha256="030cad7d6b7d8c079543203ef5c60292c961d5cc8f6acfd16e360209adda6a0c")
     version("3.15.04", sha256="9f145338854ae1bbcfbbbd7f56fd518663cfd0e2279520c31649ad1b71d4d028")
     version("develop", branch="develop", get_full_repo=True)
-
-    def url_for_version(self, version):
-        if version < Version("3.16.03"):
-            return github_version_url("NuSoftHEP", "nutools", f"v{version.underscored}")
-        else:
-            return super().url_for_version(version)
 
     variant(
         "cxxstd",
@@ -62,9 +55,9 @@ class Nutools(CMakePackage):
             self.define("IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES", True),
         ]
 
-    def setup_build_environment(self, spack_env):
+    def setup_build_environment(self, build_env):
         # Cleaup.
-        sanitize_environments(spack_env)
+        sanitize_environments(build_env)
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("PATH", self.prefix.bin)

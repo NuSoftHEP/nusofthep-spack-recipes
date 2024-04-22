@@ -3,10 +3,9 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-import os
-
 from spack import *
-from spack.pkg.fnal_art.utilities import *
+from spack.pkg.fnal_art.fnal_github_package import *
+from spack.util.prefix import Prefix
 
 
 def sanitize_environments(*args):
@@ -25,23 +24,16 @@ def sanitize_environments(*args):
             env.deprioritize_system_paths(var)
 
 
-class Nugen(CMakePackage):
+class Nugen(CMakePackage, FnalGithubPackage):
     """Generator interfaces to art for GENIE and GiBUU."""
 
-    git = "https://github.com/NuSoftHEP/nugen.git"
-    homepage = git
-    url = "https://github.com/NuSoftHEP/nugen/archive/refs/tags/1.20.06.tar.gz"
-    list_url = "https://github.com/NuSoftHEP/nugen/tags"
+    repo = "NuSoftHEP/nugen"
+    license("Apache-2.0")
+    version_patterns = ["v1_19_06", "1.20.03"]
 
     version("1.20.06", sha256="ae2ebc347c2e3f6f44c6e43dab3c5f74752c20396824f2fbc0d6a4d55b614df3")
     version("1.19.06", sha256="718c2fb406fbebefd18d8906ca313513dfdd9d0ff4bda7cf6aff842c84f1ca2d")
     version("develop", branch="develop", get_full_repo=True)
-
-    def url_for_version(self, version):
-        if version < Version("1.20.03"):
-            return github_version_url("NuSoftHEP", "nugen", f"v{version.underscored}")
-        else:
-            return super().url_for_version(version)
 
     variant(
         "cxxstd",
@@ -84,10 +76,10 @@ class Nugen(CMakePackage):
             self.define("GENIE_INC", self.spec["genie"].prefix.include),
         ]
 
-    def setup_build_environment(self, spack_env):
-        spack_env.prepend_path("CET_PLUGIN_PATH", os.path.join(self.build_directory, "lib"))
+    def setup_build_environment(self, build_env):
+        build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
         # Cleanup.
-        sanitize_environments(spack_env)
+        sanitize_environments(build_env)
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
