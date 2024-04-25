@@ -51,6 +51,7 @@ class Nusimdata(CMakePackage, FnalGithubPackage):
     depends_on("nufinder", when="@1.27.02:")
     depends_on("root")
 
+    @cmake_preset
     def cmake_args(self):
         return [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
 

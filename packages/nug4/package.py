@@ -63,6 +63,7 @@ class Nug4(CMakePackage, FnalGithubPackage):
         depends_on("art-root-io")
         depends_on("canvas-root-io")
 
+    @cmake_preset
     def cmake_args(self):
         return [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),

@@ -44,7 +44,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     )
 
     # Build-only dependencies.
-    depends_on("cmake@3.12:", type="build")
+    depends_on("cmake@3.19:", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")
 
@@ -60,8 +60,9 @@ class Nugen(CMakePackage, FnalGithubPackage):
     depends_on("dk2nugenie")
     depends_on("fhicl-cpp")
     depends_on("genie")
+    depends_on("gsl")
     depends_on("ifdh-art")
-    depends_on("ifdhc")
+    depends_on("lhapdf")
     depends_on("libxml2")
     depends_on("log4cpp")
     depends_on("messagefacility")
@@ -69,6 +70,11 @@ class Nugen(CMakePackage, FnalGithubPackage):
     depends_on("pythia6")
     depends_on("root+fftw")
 
+    # Removed from @develop
+    depends_on("canvas_root_io", when="@:1.20.06")
+    depends_on("postgresql", when="@:1.19.06")
+
+    @cmake_preset
     def cmake_args(self):
         return [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),

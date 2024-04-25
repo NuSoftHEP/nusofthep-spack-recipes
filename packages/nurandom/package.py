@@ -59,6 +59,7 @@ class Nurandom(CMakePackage, FnalGithubPackage):
         # Removed from @develop
         depends_on("boost +filesystem")
 
+    @cmake_preset
     def cmake_args(self):
         return [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
 

@@ -60,6 +60,7 @@ class Nuevdb(CMakePackage, FnalGithubPackage):
         depends_on("canvas-root-io")
         depends_on("boost +filesystem +regex +thread")
 
+    @cmake_preset
     def cmake_args(self):
         return [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),

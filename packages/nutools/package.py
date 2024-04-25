@@ -49,6 +49,7 @@ class Nutools(CMakePackage, FnalGithubPackage):
     depends_on("nusimdata")
     depends_on("perl")
 
+    @cmake_preset
     def cmake_args(self):
         return [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
