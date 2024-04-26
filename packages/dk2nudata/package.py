@@ -27,10 +27,10 @@ class Dk2nudata(CMakePackage, FnalGithubPackage):
 
     depends_on("cmake", type="build")
 
-    depends_on("root")
-    depends_on("tbb")
     depends_on("libxml2")
     depends_on("log4cpp")
+    depends_on("root")
+    depends_on("tbb")
 
     # dk2nudata cannot support parallel builds
     parallel = False

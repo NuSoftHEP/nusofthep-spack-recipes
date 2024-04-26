@@ -27,11 +27,11 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
 
     depends_on("cmake", type="build")
 
-    depends_on("root")
+    depends_on("dk2nudata")
+    depends_on("genie")
     depends_on("libxml2")
     depends_on("log4cpp")
-    depends_on("genie")
-    depends_on("dk2nudata")
+    depends_on("root")
     depends_on("tbb")
 
     def patch(self):

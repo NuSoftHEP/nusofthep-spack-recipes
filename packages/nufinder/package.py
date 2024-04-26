@@ -4,17 +4,18 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
+from spack.pkg.fnal_art.fnal_github_package import *
 
 
-class Nufinder(CMakePackage):
+class Nufinder(CMakePackage, FnalGithubPackage):
     """CMake package finding macros for nutools suite"""
 
-    homepage = "https://github.com/NuSoftHEP/nufinder"
-    git = "https://github.com/NuSoftHEP/nufinder.git"
-    url = "https://github.com/NuSoftHEP/nufinder/archive/refs/tags/v1_01_02.tar.gz"
+    repo = "NuSoftHEP/nufinder"
+    version_patterns = ["v1_00_00", "1.02.01"]
 
     maintainers = ["marcmengel", "nusense"]
     depends_on("cetmodules", type="build")
 
-    version("1_01_02", sha256="07cb659967012399bbde27ac5cdf4188d71edfb685d7b6f6bc1d24ff4a7bd987")
+    version("1.02.01", sha256="e20cd0c5e23b70f4889b79fca01fed91cff532d66dfbeb9e25f4c93a2fdda8e2")
+    version("1.01.02", sha256="07cb659967012399bbde27ac5cdf4188d71edfb685d7b6f6bc1d24ff4a7bd987")
     version("develop", branch="develop", get_full_repo=True)
