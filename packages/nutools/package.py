@@ -57,11 +57,11 @@ class Nutools(CMakePackage, FnalGithubPackage):
         ]
 
     def setup_build_environment(self, build_env):
-        # Cleaup.
+        # Cleanup.
         sanitize_environments(build_env)
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("PATH", self.prefix.bin)
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        # Cleaup.
+        # Cleanup.
         sanitize_environments(run_env)
