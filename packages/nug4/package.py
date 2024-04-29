@@ -8,22 +8,6 @@ from spack.pkg.fnal_art.fnal_github_package import *
 from spack.util.prefix import Prefix
 
 
-def sanitize_environments(*args):
-    for env in args:
-        for var in (
-            "PATH",
-            "CET_PLUGIN_PATH",
-            "LDSHARED",
-            "LD_LIBRARY_PATH",
-            "DYLD_LIBRARY_PATH",
-            "LIBRARY_PATH",
-            "CMAKE_PREFIX_PATH",
-            "ROOT_INCLUDE_PATH",
-        ):
-            env.prune_duplicate_paths(var)
-            env.deprioritize_system_paths(var)
-
-
 class Nug4(CMakePackage, FnalGithubPackage):
     """Geant4 interface from NuTools"""
 
@@ -70,15 +54,13 @@ class Nug4(CMakePackage, FnalGithubPackage):
             self.define("IGNORE_ABSOLUTE_TRANSITIVE_DEPENDENCIES", True),
         ]
 
+    @sanitize_paths
     def setup_build_environment(self, build_env):
         build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
         build_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        # Cleanup.
-        sanitize_environments(build_env)
 
+    @sanitize_paths
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         run_env.prepend_path("FHICL_FILE_PATH", self.prefix.fcl)
-        # Cleanup.
-        sanitize_environments(run_env)

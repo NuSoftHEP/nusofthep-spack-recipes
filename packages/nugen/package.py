@@ -8,22 +8,6 @@ from spack.pkg.fnal_art.fnal_github_package import *
 from spack.util.prefix import Prefix
 
 
-def sanitize_environments(*args):
-    for env in args:
-        for var in (
-            "PATH",
-            "CET_PLUGIN_PATH",
-            "LDSHARED",
-            "LD_LIBRARY_PATH",
-            "DYLD_LIBRARY_PATH",
-            "LIBRARY_PATH",
-            "CMAKE_PREFIX_PATH",
-            "ROOT_INCLUDE_PATH",
-        ):
-            env.prune_duplicate_paths(var)
-            env.deprioritize_system_paths(var)
-
-
 class Nugen(CMakePackage, FnalGithubPackage):
     """Generator interfaces to art for GENIE and GiBUU."""
 
@@ -82,13 +66,11 @@ class Nugen(CMakePackage, FnalGithubPackage):
             self.define("GENIE_INC", self.spec["genie"].prefix.include),
         ]
 
+    @sanitize_paths
     def setup_build_environment(self, build_env):
         build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
-        # Cleanup.
-        sanitize_environments(build_env)
 
+    @sanitize_paths
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        # Cleanup.
-        sanitize_environments(run_env)

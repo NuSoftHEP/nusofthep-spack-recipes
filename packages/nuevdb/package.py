@@ -8,22 +8,6 @@ from spack.pkg.fnal_art.fnal_github_package import *
 from spack.util.prefix import Prefix
 
 
-def sanitize_environments(*args):
-    for env in args:
-        for var in (
-            "PATH",
-            "CET_PLUGIN_PATH",
-            "LDSHARED",
-            "LD_LIBRARY_PATH",
-            "DYLD_LIBRARY_PATH",
-            "LIBRARY_PATH",
-            "CMAKE_PREFIX_PATH",
-            "ROOT_INCLUDE_PATH",
-        ):
-            env.prune_duplicate_paths(var)
-            env.deprioritize_system_paths(var)
-
-
 class Nuevdb(CMakePackage, FnalGithubPackage):
     """Nuevdb"""
 
@@ -68,14 +52,12 @@ class Nuevdb(CMakePackage, FnalGithubPackage):
             self.define("libwda_DIR:PATH", self.spec["libwda"].prefix),
         ]
 
+    @sanitize_paths
     def setup_build_environment(self, build_env):
         build_env.prepend_path("PATH", Prefix(self.build_directory).bin)
         build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
-        # Cleanup.
-        sanitize_environments(env)
 
+    @sanitize_paths
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-        # Cleanup.
-        sanitize_environments(run_env)
