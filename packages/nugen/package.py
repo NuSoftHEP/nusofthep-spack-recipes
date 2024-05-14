@@ -55,7 +55,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     depends_on("root+fftw")
 
     # Removed from @develop
-    depends_on("canvas_root_io", when="@:1.20.06")
+    depends_on("canvas-root-io", when="@:1.20.06")
     depends_on("postgresql", when="@:1.19.06")
 
     @cmake_preset
