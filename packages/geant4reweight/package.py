@@ -15,13 +15,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
 
     version("01.20.00", sha256="f8d30f2a1426ee9e100694d4d19d58a7b98af93c8e71ff0a52cb0a1e7a6d3d96")
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     depends_on("cetmodules")
     depends_on("cetlib")

@@ -19,13 +19,7 @@ class Nuevdb(CMakePackage, FnalGithubPackage):
     version("1.09.07", sha256="f4ff8c0fb3b9d909af4bb99f68d01b7b3448661825f448adf4afe85517e62507")
     version("1.08.01", sha256="5bbf54e6c772e8f73e8ad2f7629f47e8b15731dd7af80c51b2060976c8c7a013")
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     depends_on("cetmodules", type="build")
 
