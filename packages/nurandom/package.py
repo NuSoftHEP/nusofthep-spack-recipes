@@ -35,7 +35,6 @@ class Nurandom(CMakePackage, FnalGithubPackage):
     depends_on("root")
 
     with when("@:1.11.04"):
-        # Removed from @develop
         depends_on("boost +filesystem")
 
     @cmake_preset

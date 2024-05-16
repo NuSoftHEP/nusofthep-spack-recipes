@@ -49,7 +49,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     depends_on("pythia6")
     depends_on("root+fftw")
 
-    # Removed from @develop
+    # Conditional dependencies.
     depends_on("canvas-root-io", when="@:1.20.06")
     depends_on("postgresql", when="@:1.19.06")
 

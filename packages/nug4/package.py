@@ -38,7 +38,6 @@ class Nug4(CMakePackage, FnalGithubPackage):
     depends_on("root")
 
     with when("@:1.16.05"):
-        # Remove from @develop
         depends_on("art-root-io")
         depends_on("canvas-root-io")
 
