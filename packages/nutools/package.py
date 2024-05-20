@@ -19,13 +19,7 @@ class Nutools(CMakePackage, FnalGithubPackage):
     version("3.15.04", sha256="9f145338854ae1bbcfbbbd7f56fd518663cfd0e2279520c31649ad1b71d4d028")
     version("develop", branch="develop", get_full_repo=True)
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     depends_on("cetmodules", type="build")
 

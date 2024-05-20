@@ -17,13 +17,7 @@ class Dk2nudata(CMakePackage, FnalGithubPackage):
 
     version("01.10.01", sha256="8680ffae5182dc1c0a04a3410cf687c4b7c0d9420e2aabc5c3c4bb42c69c3dd0")
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     depends_on("cmake", type="build")
 

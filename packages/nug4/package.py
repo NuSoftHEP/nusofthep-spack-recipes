@@ -20,13 +20,7 @@ class Nug4(CMakePackage, FnalGithubPackage):
     version("1.15.02", sha256="53dcc4998a9e4841739cfbc7ee2e5cb312321cb1be2591af891f39ff7d306ed7")
     version("develop", branch="develop", get_full_repo=True)
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     # Build-only dependencies.
     depends_on("cetmodules", type="build")
@@ -44,7 +38,6 @@ class Nug4(CMakePackage, FnalGithubPackage):
     depends_on("root")
 
     with when("@:1.16.05"):
-        # Remove from @develop
         depends_on("art-root-io")
         depends_on("canvas-root-io")
 
