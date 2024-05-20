@@ -21,13 +21,7 @@ class Nurandom(CMakePackage, FnalGithubPackage):
     version("1.10.02", sha256="9010dc663d08ee3c7451a7c423f2350a77fe98f3de8bfd4cbd9a5bdcb67c6114")
     version("develop", branch="develop", get_full_repo=True)
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     # Build-only dependencies.
     depends_on("cetmodules", type="build")
@@ -42,7 +36,6 @@ class Nurandom(CMakePackage, FnalGithubPackage):
     depends_on("root")
 
     with when("@:1.11.04"):
-        # Removed from @develop
         depends_on("boost +filesystem")
 
     @cmake_preset

@@ -20,13 +20,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     version("1.19.06", sha256="718c2fb406fbebefd18d8906ca313513dfdd9d0ff4bda7cf6aff842c84f1ca2d")
     version("develop", branch="develop", get_full_repo=True)
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     # Build-only dependencies.
     depends_on("cmake@3.19:", type="build")
@@ -55,7 +49,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     depends_on("pythia6")
     depends_on("root+fftw")
 
-    # Removed from @develop
+    # Conditional dependencies.
     depends_on("canvas-root-io", when="@:1.20.06")
     depends_on("postgresql", when="@:1.19.06")
 
