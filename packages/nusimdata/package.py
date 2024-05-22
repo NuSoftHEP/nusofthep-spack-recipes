@@ -33,12 +33,3 @@ class Nusimdata(CMakePackage, FnalGithubPackage):
     @cmake_preset
     def cmake_args(self):
         return [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
-
-    @sanitize_paths
-    def setup_build_environment(self, build_env):
-        build_env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
-        build_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-
-    @sanitize_paths
-    def setup_run_environment(self, run_env):
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)

@@ -5,7 +5,6 @@
 
 from spack import *
 from spack.pkg.fnal_art.fnal_github_package import *
-from spack.util.prefix import Prefix
 
 
 class Nug4(CMakePackage, FnalGithubPackage):
@@ -49,12 +48,6 @@ class Nug4(CMakePackage, FnalGithubPackage):
         ]
 
     @sanitize_paths
-    def setup_build_environment(self, build_env):
-        build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
-        build_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-
-    @sanitize_paths
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         run_env.prepend_path("FHICL_FILE_PATH", self.prefix.fcl)
