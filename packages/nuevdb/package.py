@@ -5,7 +5,6 @@
 
 from spack import *
 from spack.pkg.fnal_art.fnal_github_package import *
-from spack.util.prefix import Prefix
 
 
 class Nuevdb(CMakePackage, FnalGithubPackage):
@@ -47,11 +46,5 @@ class Nuevdb(CMakePackage, FnalGithubPackage):
         ]
 
     @sanitize_paths
-    def setup_build_environment(self, build_env):
-        build_env.prepend_path("PATH", Prefix(self.build_directory).bin)
-        build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
-
-    @sanitize_paths
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
