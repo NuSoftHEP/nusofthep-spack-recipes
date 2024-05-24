@@ -16,10 +16,6 @@ class Nusimdata(CMakePackage, FnalGithubPackage):
 
     version("develop", branch="develop", get_full_repo=True)
     version("1.28.06", sha256="da5c30b230b37f546612429688e3b4195bdd7b49beccf1f5001ed49cab8717c5")
-
-    version("1.28.05", sha256="edfc013a790e6f8633088931cd54b7a60adeb4197c87849c3cad124c3dfade9c")
-    version("1.28.04", sha256="43b2e51708a295c7a8a4c4cf7ad4cb86741e1f086470b6ed15659ce4c5fb02e1")
-    version("1.28.03", sha256="b81590e2822421fc3f9a8849e57107f90a3f254334da25b1db03140ec2a2701d")
     version("1.27.02", sha256="ed61e94ef931ed6383299db281c54df82136dfe5331492072ac1a3f08770b6a8")
 
 
