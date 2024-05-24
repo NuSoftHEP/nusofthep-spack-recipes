@@ -29,6 +29,7 @@ class Nutools(CMakePackage, FnalGithubPackage):
     depends_on("cetmodules", type="build")
 
     depends_on("art")
+    depends_on("art-root-io")
     depends_on("cry")
     depends_on("nusimdata")
     depends_on("perl")

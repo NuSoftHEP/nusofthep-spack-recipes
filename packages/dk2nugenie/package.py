@@ -36,7 +36,7 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
 
     def patch(self):
         patch("dk2nu.patch", when="^genie@3.00.00:", working_dir=f"v{self.version}")
-        cmakelists = FileFilter(f"{self.stage.source_path}/dk2nu/genie/CMakeLists.txt")
+        cmakelists = FileFilter(f"genie/CMakeLists.txt")
         cmakelists.filter(r"\$\{GENIE\}/src", "${GENIE}/include/GENIE")
         cmakelists.filter(r"\$ENV", "$")
         cmakelists.filter("execute_process", "#execute_process")
