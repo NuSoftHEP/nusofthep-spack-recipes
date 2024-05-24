@@ -22,13 +22,7 @@ class Nusimdata(CMakePackage, FnalGithubPackage):
     version("1.27.02", sha256="ed61e94ef931ed6383299db281c54df82136dfe5331492072ac1a3f08770b6a8")
 
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     # Build and link dependencies.
     depends_on("cetmodules", type="build")
