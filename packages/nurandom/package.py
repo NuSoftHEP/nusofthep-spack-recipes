@@ -17,8 +17,6 @@ class Nurandom(CMakePackage, FnalGithubPackage):
 
     version("1.11.05", sha256="752d3b27073915e8e609d7a50821285359f3f4a5082786955f8c7d7a134396e9")
     version("1.11.04", sha256="0535d786322ee87c203b722726e50ee48a1ee8f5d110bb1afd28ac1cfb2c5b4b")
-    version("1.11.03", sha256="a2e12f8c9a205ede46ce9152f80bbbd50d3393531b8a752434222d52052cc282")
-    version("1.10.02", sha256="9010dc663d08ee3c7451a7c423f2350a77fe98f3de8bfd4cbd9a5bdcb67c6114")
     version("develop", branch="develop", get_full_repo=True)
 
     cxxstd_variant("17", "20", default="17")
