@@ -14,6 +14,16 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     version_patterns = ["v01_20_00", "01.20.05"]
 
     version("01.20.00", sha256="f8d30f2a1426ee9e100694d4d19d58a7b98af93c8e71ff0a52cb0a1e7a6d3d96")
+    version("01.16.05", sha256="23417293c2bb5663bbe26398c622c08052563febf396fd7513e9c8536687c6e8")
+
+    # experiment versions
+    variant("experiment", default="lar", description="Experiment variants",
+            values=("lar", "nova"), multi=False)
+    conflicts("@01.20.00", when="experiment=nova") # lar flavour
+    conflicts("@01.16.05", when="experiment=lar") # nova flavour
+
+    # patches
+    patch("patch/v01-16-05.p", when="@01.16.05")
 
     cxxstd_variant("17", "20", default="17")
 
