@@ -19,8 +19,8 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     # experiment versions
     variant("experiment", default="lar", description="Experiment variants",
             values=("lar", "nova"), multi=False)
-    conflicts("@01.20.00", when="experiment=nova") # lar flavour
-    conflicts("@01.16.05", when="experiment=lar") # nova flavour
+    requires("experiment=lar", when="@01.20.00")
+    requires("experiment=nova", when="@01.16.05")
 
     # patches
     patch("patch/v01-16-05.p", when="@01.16.05")
