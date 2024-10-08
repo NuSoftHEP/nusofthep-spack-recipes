@@ -41,8 +41,10 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
     def cmake_args(self):
         if os.path.exists(self.spec["tbb"].prefix.lib64):
             tbblib = self.spec["tbb"].prefix.lib64
-        else:
+        if os.path.exists(self.spec["tbb"].prefix.lib):
             tbblib = self.spec["tbb"].prefix.lib
+        if os.path.exists(self.spec["tbb"].prefix.tbb.latest.lib):
+            tbblib = self.spec["tbb"].prefix.tbb.latest.lib
         genie = self.spec["genie"]
         return [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
