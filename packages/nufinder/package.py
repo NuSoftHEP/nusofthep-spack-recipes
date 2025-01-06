@@ -17,5 +17,4 @@ class Nufinder(CMakePackage, FnalGithubPackage):
     depends_on("cetmodules", type="build")
 
     version("1.02.01", sha256="e20cd0c5e23b70f4889b79fca01fed91cff532d66dfbeb9e25f4c93a2fdda8e2")
-    version("1.01.02", sha256="07cb659967012399bbde27ac5cdf4188d71edfb685d7b6f6bc1d24ff4a7bd987")
     version("develop", branch="develop", get_full_repo=True)

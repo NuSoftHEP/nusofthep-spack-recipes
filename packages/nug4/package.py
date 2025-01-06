@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+from spack.package import *
 from spack.pkg.fnal_art.fnal_github_package import *
-from spack.util.prefix import Prefix
 
 
 class Nug4(CMakePackage, FnalGithubPackage):
@@ -15,17 +15,11 @@ class Nug4(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
     version_patterns = ["v1_15_02", "1.16.03"]
 
+    version("1.16.06", sha256="afee7472150df82121992db3f5b549f05a013e40debb491bff54c123e1944c37")
     version("1.16.05", sha256="91d5cf3bfed7206e92193582b4dca48e9089042b959c088666c5c83cedbf0e56")
-    version("1.15.02", sha256="53dcc4998a9e4841739cfbc7ee2e5cb312321cb1be2591af891f39ff7d306ed7")
     version("develop", branch="develop", get_full_repo=True)
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     # Build-only dependencies.
     depends_on("cetmodules", type="build")
@@ -43,7 +37,6 @@ class Nug4(CMakePackage, FnalGithubPackage):
     depends_on("root")
 
     with when("@:1.16.05"):
-        # Remove from @develop
         depends_on("art-root-io")
         depends_on("canvas-root-io")
 
@@ -55,12 +48,6 @@ class Nug4(CMakePackage, FnalGithubPackage):
         ]
 
     @sanitize_paths
-    def setup_build_environment(self, build_env):
-        build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
-        build_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
-
-    @sanitize_paths
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         run_env.prepend_path("FHICL_FILE_PATH", self.prefix.fcl)

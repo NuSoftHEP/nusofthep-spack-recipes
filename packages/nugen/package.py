@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+from spack.package import *
 from spack.pkg.fnal_art.fnal_github_package import *
 from spack.util.prefix import Prefix
 
@@ -15,17 +16,12 @@ class Nugen(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
     version_patterns = ["v1_19_06", "1.20.03"]
 
-    version("1.20.06", sha256="ae2ebc347c2e3f6f44c6e43dab3c5f74752c20396824f2fbc0d6a4d55b614df3")
-    version("1.19.06", sha256="718c2fb406fbebefd18d8906ca313513dfdd9d0ff4bda7cf6aff842c84f1ca2d")
+    version("1.21.02", sha256="11dfa220c53c7d6c7593a84e3e37f3af44964e3461c111667c40a341095a6e80")
+    version("1.21.00", sha256="84fab7eabe96a408c5927d6d948021866a8fcc7a1b6e342bce6ea5aaad9570f4")
+    version("1.20.07", sha256="d8de1e474189e8030f00f0b1c35dc11625d45e9cd902b048bf46b0956fc52f83")
     version("develop", branch="develop", get_full_repo=True)
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
+    cxxstd_variant("17", "20", default="17")
 
     # Build-only dependencies.
     depends_on("cmake@3.19:", type="build")
@@ -54,7 +50,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     depends_on("pythia6")
     depends_on("root+fftw")
 
-    # Removed from @develop
+    # Conditional dependencies.
     depends_on("canvas-root-io", when="@:1.20.06")
     depends_on("postgresql", when="@:1.19.06")
 
@@ -67,10 +63,5 @@ class Nugen(CMakePackage, FnalGithubPackage):
         ]
 
     @sanitize_paths
-    def setup_build_environment(self, build_env):
-        build_env.prepend_path("CET_PLUGIN_PATH", Prefix(self.build_directory).lib)
-
-    @sanitize_paths
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
-        run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
