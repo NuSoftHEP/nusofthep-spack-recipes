@@ -47,6 +47,10 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
         if os.path.exists(self.spec["tbb"].prefix.tbb.latest.lib):
             tbblib = self.spec["tbb"].prefix.tbb.latest.lib
         genie = self.spec["genie"]
+        if os.path.exists(self.spec["libxml2"].prefix.include.libxml2):
+            libxml2inc = self.spec["libxml2"].prefix.include.libxml2
+        else:
+            libxml2inc = self.spec["libxml2"].prefix.include
         return [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
             self.define("CMAKE_INSTALL_PREFIX", self.prefix),
@@ -56,7 +60,7 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
             self.define("GENIE", genie.prefix),
             self.define("GENIE_VERSION", genie.version),
             self.define("DK2NUDATA_DIR", self.spec["dk2nudata"].prefix.lib),
-            self.define("LIBXML2_INC", self.spec["libxml2"].prefix.include),
+            self.define("LIBXML2_INC", libxml2inc),
             self.define("LOG4CPP_INC", self.spec["log4cpp"].prefix.include),
         ]
 
