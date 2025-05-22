@@ -20,6 +20,9 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
 
     cxxstd_variant("17", "20", default="17")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("cmake", type="build")
 
     depends_on("dk2nudata")
