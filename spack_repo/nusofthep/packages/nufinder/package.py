@@ -4,7 +4,8 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
-from spack.pkg.fnal_art.fnal_github_package import *
+from spack_repo.builtin.build_systems.cmake import CMakePackage
+from spack_repo.fnal_art.packages.fnal_github_package.package import *
 
 
 class Nufinder(CMakePackage, FnalGithubPackage):
