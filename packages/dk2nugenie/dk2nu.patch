@@ -1,0 +1,56 @@
+diff -Naur dk2nu/genie/CMakeLists.txt dk2nu/genie/CMakeLists.txt
+--- dk2nu/genie/CMakeLists.txt	2018-06-25 12:28:53.439213000 -0500
++++ dk2nu/genie/CMakeLists.txt	2018-09-24 17:46:13.008123381 -0500
+@@ -15,31 +15,18 @@
+ 
+ set(ART_VERSION $ENV{ART_VERSION})
+ # if using ART pre-link to libraries using find_library
+-if ( "${ART_VERSION}" STREQUAL "" )
+-  # for now don't pre-link unless ART's around
+-else()
+   # log4cpp
+   find_library( LOG4CPP NAMES log4cpp PATHS ENV LOG4CPP_LIB NO_DEFAULT_PATH )
+   #  XML parser
+   set( LIBXML2_LIB_DIR $ENV{LIBXML2_FQ_DIR}/lib )
+   find_library( XML2 NAMES xml2 PATHS ${LIBXML2_LIB_DIR} NO_DEFAULT_PATH )
+ 
+-  if( ${GENIE_MAJOR_VERSION} LESS 3 )
+-    find_library( GPDG NAMES GPDG PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+-    find_library( GUTILS NAMES GUtils PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+-    find_library( GFLUXDRIVERS NAMES GFluxDrivers PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+-    find_library( GEVGDRIVERS NAMES GEVGDrivers PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+-    find_library( GMESSENGER NAMES GMessenger PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+-    find_library( GNUMERICAL NAMES GNumerical PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+-  else()
+     find_library( GMESSENGER NAMES GFwMsg PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+     find_library( GNUMERICAL NAMES GFwNum PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+     find_library( GUTILS     NAMES GFwUtl PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+     find_library( GPDG     NAMES GFwParDat PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+     find_library( GEVGDRIVERS NAMES GFwEG  PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+     find_library( GFLUXDRIVERS NAMES GTlFlx PATHS ENV GENIE_LIB NO_DEFAULT_PATH )
+-  endif()
+-endif()
+ 
+ MESSAGE("--DK2NU-- WITH_GENIE or GENIE_ONLY was true")
+ if (GENIE_ONLY)
+@@ -63,7 +50,7 @@
+                         $ENV{LOG4CPP_INC}
+                         ${GENIE}/src)
+ 
+-set(LINK_DIRECTORIES ${LINK_DIRECTORIES} ${GENIE}/lib )
++set(LINK_DIRECTORIES ${LINK_DIRECTORIES} ${GENIE_LIB} )
+ if (GENIE_ONLY)
+   set(LINK_DIRECTORIES ${LINK_DIRECTORIES} ${DK2NUDATA_DIR}/lib )
+     MESSAGE("DK2NUDATA_DIR = ${DK2NUDATA_DIR}")
+diff -Naur dk2nu/make.include dk2nu/make.include
+--- dk2nu/make.include	2013-10-02 19:28:57.781215000 -0500
++++ dk2nu/make.include	2018-09-24 17:44:35.444923011 -0500
+@@ -37,7 +37,7 @@
+ 
+ # GENIE interface require additional locations
+ ifneq ($(GENIE),)
+-   LDFLAGS += -L$(GENIE)/lib
++   LDFLAGS += -L$(GENIE_LIB)
+    INCLUDE += -I$(GENIE)/src
+ # this won't work when GENIE wasn't built in-place
+   GOPT_LIBXML2_LIB=$(shell grep LIBXML2_LIB $(GENIE)/src/make/Make.config | cut -d'=' -f2)
