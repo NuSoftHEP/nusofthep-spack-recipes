@@ -16,6 +16,7 @@ class Nug4(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
     version_patterns = ["v1_15_02", "1.16.03"]
 
+    version("1.16.08", sha256="f19d4b170c0f5b2a36ee315d6681b6faa8500b513a91f5ba3f06d1ad7925745d")
     version("1.16.06", sha256="afee7472150df82121992db3f5b549f05a013e40debb491bff54c123e1944c37")
     version("1.16.05", sha256="91d5cf3bfed7206e92193582b4dca48e9089042b959c088666c5c83cedbf0e56")
     version("develop", branch="develop", get_full_repo=True)
