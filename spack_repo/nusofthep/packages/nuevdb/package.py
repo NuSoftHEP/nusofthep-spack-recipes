@@ -13,7 +13,7 @@ class Nuevdb(CMakePackage, FnalGithubPackage):
     """Nuevdb"""
 
     repo = "NuSoftHEP/nuevdb"
-    git = "https://github.com/%s.git" % repo
+    git = "https://github.com/%s" % repo
     license("Apache-2.0")
     version_patterns = ["v1_08_01", "1.09.03"]
 
