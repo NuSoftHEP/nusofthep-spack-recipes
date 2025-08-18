@@ -13,6 +13,7 @@ class Nusimdata(CMakePackage, FnalGithubPackage):
     """Nusimdata"""
 
     repo = "NuSoftHEP/nusimdata"
+    git = "https://github.com/%s.git" % repo
     license("Apache-2.0")
     version_patterns = ["v1_24_05", "1.27.02"]
 

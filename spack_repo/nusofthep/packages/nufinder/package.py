@@ -12,6 +12,7 @@ class Nufinder(CMakePackage, FnalGithubPackage):
     """CMake package finding macros for nutools suite"""
 
     repo = "NuSoftHEP/nufinder"
+    git = "https://github.com/%s.git" % repo
     version_patterns = ["v1_00_00", "1.02.01"]
 
     maintainers = ["marcmengel", "nusense"]

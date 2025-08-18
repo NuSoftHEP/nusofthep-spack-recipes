@@ -13,6 +13,7 @@ class Nutools(CMakePackage, FnalGithubPackage):
     """Nutools"""
 
     repo = "NuSoftHEP/nutools"
+    git = "https://github.com/%s.git" % repo
     license("Apache-2.0")
     version_patterns = ["v3_15_04", "3.16.03"]
 
