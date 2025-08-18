@@ -13,6 +13,7 @@ class Nug4(CMakePackage, FnalGithubPackage):
     """Geant4 interface from NuTools"""
 
     repo = "NuSoftHEP/nug4"
+    git = "https://github.com/%s" % repo
     license("Apache-2.0")
     version_patterns = ["v1_15_02", "1.16.03"]
 

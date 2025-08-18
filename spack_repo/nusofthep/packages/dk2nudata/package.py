@@ -15,6 +15,7 @@ class Dk2nudata(CMakePackage, FnalGithubPackage):
     """This package consolidates the disparate formats of neutrino beam simulation "flux" files."""
 
     repo = "NuSoftHEP/dk2nu"
+    git = "https://github.com/%s" % repo
     version_patterns = ["v0_10_01"]
 
     version("01.10.01", sha256="8680ffae5182dc1c0a04a3410cf687c4b7c0d9420e2aabc5c3c4bb42c69c3dd0")

@@ -12,6 +12,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     """Repository for implementing reweighting of Pion Scattering as simulated by Geant4"""
 
     repo = "NuSoftHEP/Geant4Reweight"
+    git = "https://github.com/%s" % repo
     version_patterns = ["v01_20_00", "01.20.05"]
 
     version("01.20.00", sha256="f8d30f2a1426ee9e100694d4d19d58a7b98af93c8e71ff0a52cb0a1e7a6d3d96")

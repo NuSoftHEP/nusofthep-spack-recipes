@@ -14,6 +14,7 @@ class Nurandom(CMakePackage, FnalGithubPackage):
     """Random number generator interfaces to art."""
 
     repo = "NuSoftHEP/nurandom"
+    git = "https://github.com/%s" % repo
     license("Apache-2.0")
     version_patterns = ["v1_10_02", "1.11.03"]
 

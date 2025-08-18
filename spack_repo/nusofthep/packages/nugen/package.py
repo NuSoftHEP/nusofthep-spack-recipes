@@ -14,6 +14,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     """Generator interfaces to art for GENIE and GiBUU."""
 
     repo = "NuSoftHEP/nugen"
+    git = "https://github.com/%s" % repo
     license("Apache-2.0")
     version_patterns = ["v1_19_06", "1.20.03"]
 
