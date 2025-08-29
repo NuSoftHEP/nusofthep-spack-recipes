@@ -27,6 +27,8 @@ class Nugen(CMakePackage, FnalGithubPackage):
 
     cxxstd_variant("17", "20", default="17")
 
+    patch("tpythia6.patch")
+
     depends_on("c", type="build")
     depends_on("cxx", type="build")
 
@@ -55,6 +57,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     depends_on("messagefacility")
     depends_on("nusimdata")
     depends_on("pythia6")
+    depends_on("tpythia6")
     depends_on("root+fftw")
 
     # Conditional dependencies.

@@ -1,0 +1,139 @@
+diff --git a/nugen/EventGeneratorBase/GENIE/CMakeLists.txt b/nugen/EventGeneratorBase/GENIE/CMakeLists.txt
+index 3a942d8..ec9077e 100644
+--- a/nugen/EventGeneratorBase/GENIE/CMakeLists.txt
++++ b/nugen/EventGeneratorBase/GENIE/CMakeLists.txt
+@@ -17,7 +17,7 @@ art_make_library( LIBRARIES PRIVATE nusimdata::SimulationBase
+                         ${GENIE_LIB_LIST}
+                         GSL::gsl  # FWNUM relies on GSL
+                         BLAS::BLAS
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ${ROOT_EVE_LIB_LIST}
+                         dk2nu::Tree
+                         dk2nu::Genie
+diff --git a/nugen/EventGeneratorBase/GiBUU/CMakeLists.txt b/nugen/EventGeneratorBase/GiBUU/CMakeLists.txt
+index 1848475..b5a6605 100644
+--- a/nugen/EventGeneratorBase/GiBUU/CMakeLists.txt
++++ b/nugen/EventGeneratorBase/GiBUU/CMakeLists.txt
+@@ -13,7 +13,7 @@ art_make_library(LIBRARIES PRIVATE nugen::EventGeneratorBase_GENIE
+                         ${GENIE_LIB_LIST}
+                         GSL::gsl  # FWNUM relies on GSL
+                         BLAS::BLAS
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ${ROOT_EVE_LIB_LIST}
+                         ifdh::ifdh
+                         ROOT::Geom
+diff --git a/nugen/EventGeneratorBase/Modules/CMakeLists.txt b/nugen/EventGeneratorBase/Modules/CMakeLists.txt
+index b1cd02f..b4b5ec0 100644
+--- a/nugen/EventGeneratorBase/Modules/CMakeLists.txt
++++ b/nugen/EventGeneratorBase/Modules/CMakeLists.txt
+@@ -14,7 +14,7 @@ cet_build_plugin(AddGenieEventsToArt art::module
+                         ${GENIE_LIB_LIST}
+                         GSL::gsl  # FWNUM relies on GSL
+                         BLAS::BLAS
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ${ROOT_EVE_LIB_LIST}
+                         CLHEP::CLHEP
+                         dk2nu::Tree
+@@ -23,7 +23,7 @@ cet_build_plugin(AddGenieEventsToArt art::module
+                         ROOT::EG
+                         ROOT::TreePlayer
+                         ROOT::FFTW
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ROOT::Gui
+                         )
+ cet_build_plugin(GenieOutput art::module
+@@ -41,7 +41,7 @@ cet_build_plugin(GenieOutput art::module
+                         ${GENIE_LIB_LIST}
+                         GSL::gsl  # FWNUM relies on GSL
+                         BLAS::BLAS
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ${ROOT_EVE_LIB_LIST}
+                         CLHEP::CLHEP
+                         dk2nu::Tree
+@@ -50,7 +50,7 @@ cet_build_plugin(GenieOutput art::module
+                         ROOT::EG
+                         ROOT::TreePlayer
+                         ROOT::FFTW
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ROOT::Gui
+                         )
+ cet_build_plugin(TestGENIEHelper art::module
+@@ -68,7 +68,7 @@ cet_build_plugin(TestGENIEHelper art::module
+                         ${GENIE_LIB_LIST}
+                         GSL::gsl  # FWNUM relies on GSL
+                         BLAS::BLAS
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ${ROOT_EVE_LIB_LIST}
+                         CLHEP::CLHEP
+                         dk2nu::Tree
+@@ -80,7 +80,7 @@ cet_build_plugin(TestGENIEHelper art::module
+                         ROOT::EG
+                         ROOT::TreePlayer
+                         ROOT::FFTW
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ROOT::Gui
+                         )
+ 
+diff --git a/nugen/EventGeneratorBase/test/CMakeLists.txt b/nugen/EventGeneratorBase/test/CMakeLists.txt
+index 34b1573..23a103d 100644
+--- a/nugen/EventGeneratorBase/test/CMakeLists.txt
++++ b/nugen/EventGeneratorBase/test/CMakeLists.txt
+@@ -21,7 +21,7 @@ art_make( EXCLUDE EventGeneratorTest_module.cc ### MIGRATE-ACTION-RECOMMENDED: u
+                         ${GENIE_LIB_LIST}
+                         GSL::gsl  # FWNUM relies on GSL
+                         BLAS::BLAS
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ${ROOT_EVE_LIB_LIST}
+                         CLHEP::CLHEP
+                         dk2nu::Tree
+@@ -29,7 +29,7 @@ art_make( EXCLUDE EventGeneratorTest_module.cc ### MIGRATE-ACTION-RECOMMENDED: u
+                         ROOT::EG
+                         ROOT::TreePlayer
+                         ROOT::FFTW
+-                        ROOT::EGPythia6
++                        EGPythia6
+                         ROOT::Gui
+                         )
+ 
+diff --git a/nugen/NuReweight/CMakeLists.txt b/nugen/NuReweight/CMakeLists.txt
+index b8f3cee..9e2c533 100644
+--- a/nugen/NuReweight/CMakeLists.txt
++++ b/nugen/NuReweight/CMakeLists.txt
+@@ -9,7 +9,7 @@ art_make_library(
+     ${GENIE_LIB_LIST}
+     GSL::gsl  # FWNUM relies on GSL
+     BLAS::BLAS
+-    ROOT::EGPythia6
++    EGPythia6
+     ${ROOT_EVE_LIB_LIST}
+     ROOT::Core
+ )
+diff --git a/nugen/NuReweight/art/CMakeLists.txt b/nugen/NuReweight/art/CMakeLists.txt
+index 0463a90..430ab28 100644
+--- a/nugen/NuReweight/art/CMakeLists.txt
++++ b/nugen/NuReweight/art/CMakeLists.txt
+@@ -23,13 +23,13 @@ set( NURW_LIBS art::Framework_Services_Registry
+                ${GENIE_LIB_LIST}
+                GSL::gsl  # FWNUM relies on GSL
+                BLAS::BLAS
+-               ROOT::EGPythia6
++               EGPythia6
+                ${ROOT_EVE_LIB_LIST}
+                ROOT::Core
+                ROOT::EG
+                ROOT::TreePlayer
+                ROOT::FFTW
+-               ROOT::EGPythia6
++               EGPythia6
+                ROOT::Gui
+            )
+ 
