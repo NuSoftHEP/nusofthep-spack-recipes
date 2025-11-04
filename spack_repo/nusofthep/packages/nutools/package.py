@@ -17,6 +17,7 @@ class Nutools(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
     version_patterns = ["v3_15_04", "3.16.03"]
 
+    version("3.20.01", sha256="ab7276c58eb17911719af7948ee6304dcd7668314f1e943bf5949f57f99767ed")
     version("3.19.02", sha256="a1429623215a64b2db74f573b5e12f6488a71a9b0bd5eb5eceb4a2da27e6ca88")
     version("3.19.01", sha256="db412e148b90731903ea6458775f072488f1fbab70a94ce8ae5921c0b75bbc97")
     version("3.17.01", sha256="6f517b7436690ce8b1d43cc9929d59bba061e993ac0ae3274712be3978366bd3")

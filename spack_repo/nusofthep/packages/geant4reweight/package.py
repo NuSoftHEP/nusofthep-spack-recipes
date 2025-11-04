@@ -15,6 +15,10 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     git = "https://github.com/%s" % repo
     version_patterns = ["v01_20_00", "01.20.05"]
 
+    version("01.20.13", sha256="a9357ebd25c0ad396730ea19ab4a913bd7ed7447160354479e8c600431d96932")
+    version("01.20.12", sha256="966125455c62e37ba9f226ff7b6b326a7d41c02b35b39ca4f49ba5570c6b9f81")
+    version("01.20.11", sha256="b807985685d5cb6c1df3cc3e9a9dcadd8589515fcb88b22891f9546cb457478b")
+    version("01.20.05", sha256="338aecfa71483a1a22c403f63f143ad08721ad4679d64bf1e7c058ba0cf92414")
     version("01.20.00", sha256="f8d30f2a1426ee9e100694d4d19d58a7b98af93c8e71ff0a52cb0a1e7a6d3d96")
     version("01.16.05", sha256="23417293c2bb5663bbe26398c622c08052563febf396fd7513e9c8536687c6e8")
 

@@ -18,6 +18,8 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
     git = "https://github.com/%s" % repo
     version_patterns = ["v0_10_01"]
 
+    version("01.11.00", sha256="5b5f8993c230b10c2354fd428bfa51e1e7d2c8477a3ee0ecb0dd5d8bc3429dbe")
+    version("01.10.02", sha256="6186a03cc778e93ebe86be82b31becaf205d0e6eb2ca2de1cfe48d1e98df809f")
     version("01.10.01", sha256="8680ffae5182dc1c0a04a3410cf687c4b7c0d9420e2aabc5c3c4bb42c69c3dd0")
 
     cxxstd_variant("17", "20", default="17")
