@@ -42,6 +42,8 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
         cmakelists.filter(r"\$\{GENIE\}/src", "${GENIE}/include/GENIE")
         cmakelists.filter(r"\$ENV", "$")
         cmakelists.filter("execute_process", "#execute_process")
+        cmakelists.filter("ENV GENIE_LIB", "${GENIE_LIB}")
+        cmakelists.filter("ENV LOG4CPP", "${LOG4CPP_LIB}")
 
     # dk2nugenie cannot support parallel builds
     parallel = False
@@ -64,11 +66,13 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
             self.define("GENIE_ONLY", True),
             self.define("TBB_LIBRARY", os.path.join(tbblib, "libtbb.so")),
             self.define("GENIE_INC", genie.prefix.include.GENIE),
+            self.define("GENIE_LIB", genie.prefix.lib),
             self.define("GENIE", genie.prefix),
             self.define("GENIE_VERSION", genie.version),
             self.define("DK2NUDATA_DIR", self.spec["dk2nudata"].prefix.lib),
             self.define("LIBXML2_INC", libxml2inc),
             self.define("LOG4CPP_INC", self.spec["log4cpp"].prefix.include),
+            self.define("LOG4CPP_LIB", self.spec["log4cpp"].prefix.lib),
         ]
 
     def setup_build_environment(self, env):
