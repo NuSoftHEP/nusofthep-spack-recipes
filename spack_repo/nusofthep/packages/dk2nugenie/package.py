@@ -43,7 +43,7 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
         cmakelists.filter(r"\$ENV", "$")
         cmakelists.filter("execute_process", "#execute_process")
         cmakelists.filter("ENV GENIE_LIB", "${GENIE_LIB}")
-        cmakelists.filter("ENV LOG4CPP", "${LOG4CPP_LIB}")
+        cmakelists.filter("ENV LOG4CPP_LIB", "${LOG4CPP_LIB}")
 
     # dk2nugenie cannot support parallel builds
     parallel = False
