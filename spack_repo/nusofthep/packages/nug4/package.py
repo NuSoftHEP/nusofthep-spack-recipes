@@ -32,6 +32,7 @@ class Nug4(CMakePackage, FnalGithubPackage):
 
     # Build-only dependencies.
     depends_on("cetmodules", type="build")
+    depends_on("nufinder", type="build")
 
     depends_on("art")
     depends_on("boost")
