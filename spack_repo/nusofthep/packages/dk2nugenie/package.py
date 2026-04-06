@@ -44,6 +44,7 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
         cmakelists.filter("execute_process", "#execute_process")
         cmakelists.filter("ENV GENIE_LIB", "${GENIE_LIB}")
         cmakelists.filter("ENV LOG4CPP_LIB", "${LOG4CPP_LIB}")
+        cmakelists.filter("set.*LIBXML2_LIB_DIR.*ENV.*LIBXML2_FQ_DIR.*lib.*", "")
 
     # dk2nugenie cannot support parallel builds
     parallel = False
@@ -70,6 +71,7 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
             self.define("GENIE", genie.prefix),
             self.define("GENIE_VERSION", genie.version),
             self.define("DK2NUDATA_DIR", self.spec["dk2nudata"].prefix.lib),
+            self.define("XML2", self.spec['libxml2'].prefix),
             self.define("LIBXML2_INC", libxml2inc),
             self.define("LOG4CPP_INC", self.spec["log4cpp"].prefix.include),
             self.define("LOG4CPP_LIB", self.spec["log4cpp"].prefix.lib),
