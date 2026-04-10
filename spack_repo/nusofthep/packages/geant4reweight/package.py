@@ -16,6 +16,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     version_patterns = ["v01_20_00", "01.20.05"]
 
     version("01.22.02", sha256="c7426cc44bd04e304310432cd1432c5da4e5d9ce8bb80b2fb088b3018920ffa4")
+    version("01.21.02", sha256="674751cd303df72c1e5f9a6ab14362782ec911773053c74d0f5a29298eef14dd")
     version("01.20.13", sha256="a9357ebd25c0ad396730ea19ab4a913bd7ed7447160354479e8c600431d96932")
     version("01.20.12", sha256="966125455c62e37ba9f226ff7b6b326a7d41c02b35b39ca4f49ba5570c6b9f81")
     version("01.20.11", sha256="b807985685d5cb6c1df3cc3e9a9dcadd8589515fcb88b22891f9546cb457478b")
@@ -27,6 +28,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     variant("experiment", default="lar", description="Experiment variants",
             values=("lar", "nova"), multi=False)
     requires("experiment=nova", when="@01.22.02")
+    requires("experiment=lar", when="@01.21.02")
     requires("experiment=lar", when="@01.20.00")
     requires("experiment=nova", when="@01.16.05")
 
