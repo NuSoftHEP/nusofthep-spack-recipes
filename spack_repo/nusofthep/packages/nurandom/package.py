@@ -18,6 +18,7 @@ class Nurandom(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
     version_patterns = ["v1_10_02", "1.11.03"]
 
+    version("1.11.06", sha256="75a669410b7a53183a08baf3f8db4f8e5b2221d7f1cb2a748ad7955bd384484f")
     version("1.11.05", sha256="752d3b27073915e8e609d7a50821285359f3f4a5082786955f8c7d7a134396e9")
     version("1.11.04", sha256="0535d786322ee87c203b722726e50ee48a1ee8f5d110bb1afd28ac1cfb2c5b4b")
     version("develop", branch="develop", get_full_repo=True)

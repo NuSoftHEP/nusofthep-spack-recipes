@@ -18,6 +18,7 @@ class Nug4(CMakePackage, FnalGithubPackage):
     version_patterns = ["v1_15_02", "1.16.03"]
 
     version("1.18.00", sha256="4f8cdc22a303040156274b7e603d8edcda57ce6362bb9778fdda6092b65bc4ce")
+    version("1.17.03", sha256="20eab958a46d7ba0ee75ec05142090185abff2eb5e988568c1a12112acb8629a")
     version("1.17.02", sha256="357ecb889fa67de6270918c05845dcef3c85f9b99a21ea2345c91fb1a851d625")
     version("1.16.09", sha256="e12e817ea81fc933e2cff68d05020e9ec081bc0e7decda67533bcb18655ebea7")
     version("1.16.08", sha256="f19d4b170c0f5b2a36ee315d6681b6faa8500b513a91f5ba3f06d1ad7925745d")
