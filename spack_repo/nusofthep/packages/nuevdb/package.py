@@ -18,6 +18,7 @@ class Nuevdb(CMakePackage, FnalGithubPackage):
     version_patterns = ["v1_08_01", "1.09.03"]
 
     version("develop", branch="develop", get_full_repo=True)
+    version("1.09.14", sha256="e791e5e898b169cd5d5fe684baeb39b050f23e0dd61f88a5affd6d00047e7cf3")
     version("1.09.13", sha256="f76cd0da13c7200a5b79c79a74e0c325dffd99fce5a26af10a24a7395ccc6678")
     version("1.09.12", sha256="a5905f421aebbb9db76cf645fa42bbb1b6b6d0ed2982350297f31623c82bfc5b")
     version("1.09.11", sha256="047b657d45613f514fbe1c05fe0c1fa0d6ffd5006c7c81c978932b6c277f8da6")
