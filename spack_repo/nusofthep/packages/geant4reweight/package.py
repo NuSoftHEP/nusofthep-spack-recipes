@@ -15,6 +15,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     git = "https://github.com/%s" % repo
     version_patterns = ["v01_20_00", "01.20.05"]
 
+    version("develop", branch="develop")
     version("01.23.01", sha256="a5eb94eab7ebf90b7f31ad485fafafa77a55b9719054c4c7417f9f7e9fb8ffbb")
     version("01.23.00", sha256="40d6c2f06bfb21c4885751b9f4678f5ee5048007c8fab9d23f7b68545435b5af")
     version("01.22.03", sha256="5da0ad74bc24452a63faca64443bd8fde8634504d17c599b25578c5731d93b42")
@@ -50,6 +51,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     depends_on("fhicl-cpp")
     depends_on("geant4")
     depends_on("root")
+    depends_on("hep-hpc")
 
     @cmake_preset
     def cmake_args(self):
