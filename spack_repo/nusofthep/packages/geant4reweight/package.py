@@ -51,7 +51,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     depends_on("fhicl-cpp")
     depends_on("geant4")
     depends_on("root")
-    depends_on("hep-hpc")
+    depends_on("hep-hpc", when="@01.23.01:")
 
     @cmake_preset
     def cmake_args(self):
