@@ -18,9 +18,11 @@ class Nutools(CMakePackage, FnalGithubPackage):
     version_patterns = ["v3_15_04", "3.16.03"]
 
     version("3.23.00", sha256="de6948a297942b451db746483fd75d94627051a2937b9887d322815fb0e6f8aa")
+    version("3.22.02", sha256="ad86a434a538dc6adcbd0a79b7fa2e2f226f705d09937d9e5c92f252e451c141")
     version("3.22.01", sha256="8313e85790fb998874d3f4b3eaefe6dd34a30e2b8cc839fc15a0d3e975c21157")
     version("3.22.00", sha256="5f74fa96d4164eec4db8e0eb5e873da2fff6db49689b1d4e097c4d1c41c18095")
     version("3.20.01", sha256="ab7276c58eb17911719af7948ee6304dcd7668314f1e943bf5949f57f99767ed")
+    version("3.19.03", sha256="84c889cab93d75ab8ecc966cf54c906bc6354a7529acfb94debc91dddc7292ba")
     version("3.19.02", sha256="a1429623215a64b2db74f573b5e12f6488a71a9b0bd5eb5eceb4a2da27e6ca88")
     version("3.19.01", sha256="db412e148b90731903ea6458775f072488f1fbab70a94ce8ae5921c0b75bbc97")
     version("3.17.01", sha256="6f517b7436690ce8b1d43cc9929d59bba061e993ac0ae3274712be3978366bd3")

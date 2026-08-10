@@ -18,8 +18,10 @@ class Nugen(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
     version_patterns = ["v1_19_06", "1.20.03"]
 
+    version("1.24.02", sha256="0d60722c8925d1e47c8d5b5385dbf70ce19f5b858f3fce91d24aecb45c61d435")
     version("1.24.01", sha256="f3de2897310b47ab44425c64f86842465a3ae11044d8bb296bc3e662fcbd5fba")
     version("1.24.00", sha256="5d07ef4e88af916fd9437ac8c1a34bfbd41e3b557ac31d2900eb44bcb9b6e7bd")
+    version("1.23.06", sha256="cb69ac2e0939978813dac5039a6c9700284c7d47542c2c9386628e3a74fad0c4")
     version("1.23.05", sha256="ea8843b5aa8636be1754e651e9a93ba7a6a777119fa0d07b246d359071261200")
     version("1.23.04", sha256="ee57271b881d13c753a7d9c5b0ac4be5c0624080bc54eddf93d2fe2e67c96f3a")
     version("1.23.03", sha256="58b26e73fe9f36603ed68c2578f0a7e5d1ffe201c14b5e65df917682dd6f59d3")
