@@ -72,6 +72,11 @@ class Dk2nugenie(CMakePackage, FnalGithubPackage):
             self.define("GENIE_VERSION", genie.version),
             self.define("DK2NUDATA_DIR", self.spec["dk2nudata"].prefix.lib),
             self.define("LIBXML2_INC", libxml2inc),
+            # genie/CMakeLists.txt does `find_library(XML2 xml2 PATHS
+            # ${LIBXML2_FQ_DIR}/lib NO_DEFAULT_PATH)`; without LIBXML2_FQ_DIR it
+            # searches "/lib" and XML2 -> NOTFOUND when libxml2 is a Spack build
+            # (non-OS prefix).  Point it at libxml2's prefix (multispack fix).
+            self.define("LIBXML2_FQ_DIR", self.spec["libxml2"].prefix),
             self.define("LOG4CPP_INC", self.spec["log4cpp"].prefix.include),
             self.define("LOG4CPP_LIB", self.spec["log4cpp"].prefix.lib),
         ]
