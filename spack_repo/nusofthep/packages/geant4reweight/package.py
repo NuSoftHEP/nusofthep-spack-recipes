@@ -16,11 +16,13 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     version_patterns = ["v01_20_00", "01.20.05"]
 
     version("develop", branch="develop")
+    version("01.24.00", sha256="23fa14c5246c02153c69f711b43ffa9d10eb75ad208bb7ecfc162277c7a3d248")
     version("01.23.02", sha256="464db519e27ae7d8b7d82ce4808dcdde883fe4278cb095fa5e61a9d48e28e262")
     version("01.23.01", sha256="a5eb94eab7ebf90b7f31ad485fafafa77a55b9719054c4c7417f9f7e9fb8ffbb")
     version("01.23.00", sha256="40d6c2f06bfb21c4885751b9f4678f5ee5048007c8fab9d23f7b68545435b5af")
     version("01.22.03", sha256="5da0ad74bc24452a63faca64443bd8fde8634504d17c599b25578c5731d93b42")
     version("01.22.02", sha256="c7426cc44bd04e304310432cd1432c5da4e5d9ce8bb80b2fb088b3018920ffa4")
+    version("01.21.05", sha256="77b77814f426899d15d9da85dfb4bdae9d0340f94acaee5988c0ba0b1238243c")
     version("01.21.04", sha256="18254bb1dfa0e31efc9fc5a15f9b17d5a91ae3ac4cc4951f0a2413007c90653a")
     version("01.21.03", sha256="65b6511339ef341b52cd6ff81dc9eb5c65c4bba73a91c048a633d382ed660770")
     version("01.21.02", sha256="674751cd303df72c1e5f9a6ab14362782ec911773053c74d0f5a29298eef14dd")
