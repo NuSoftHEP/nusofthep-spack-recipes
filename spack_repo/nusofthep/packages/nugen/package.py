@@ -18,6 +18,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
     version_patterns = ["v1_19_06", "1.20.03"]
 
+    version("1.25.00", sha256="46f46808ad0cc2a370324ee8c3b801e3368b664911b5f8cda58d787ef87531fe")
     version("1.24.02", sha256="0d60722c8925d1e47c8d5b5385dbf70ce19f5b858f3fce91d24aecb45c61d435")
     version("1.24.01", sha256="f3de2897310b47ab44425c64f86842465a3ae11044d8bb296bc3e662fcbd5fba")
     version("1.24.00", sha256="5d07ef4e88af916fd9437ac8c1a34bfbd41e3b557ac31d2900eb44bcb9b6e7bd")
@@ -26,6 +27,7 @@ class Nugen(CMakePackage, FnalGithubPackage):
     version("1.23.04", sha256="ee57271b881d13c753a7d9c5b0ac4be5c0624080bc54eddf93d2fe2e67c96f3a")
     version("1.23.03", sha256="58b26e73fe9f36603ed68c2578f0a7e5d1ffe201c14b5e65df917682dd6f59d3")
     version("1.23.02", sha256="8929a0072f4075e56fa847ba6ffeea8ab734bb2212893842d8412370ebafe3f9")
+    version("1.23.01sbn04", sha256="a1106b81f0ce89aa7210fec6313d46a572d01429940b0c2ee4b8109c13c11d87")
     version("1.23.01sbn02", sha256="8502b8bf99773bacd401ae664f682b44ef94644a69cee3b355442f6a1033bd33")
     version("1.23.01sbn01", sha256="d6a856c5f475b862112896b8d0c1273ecbb9d7b8765e746a0cbbd15588dbf10b")
     version("1.23.01", sha256="87dfbb279669cd17da6d80c4cb839c78f996d885b2266c9bf98a47d67805865d")
