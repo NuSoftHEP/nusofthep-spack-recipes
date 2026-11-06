@@ -54,6 +54,7 @@ class Geant4reweight(CMakePackage, FnalGithubPackage):
     depends_on("cetlib-except")
     depends_on("fhicl-cpp")
     depends_on("geant4")
+    depends_on("hdf5")
     depends_on("root")
 
     @cmake_preset
